@@ -2,7 +2,9 @@
 
 @section('content')
 
-    <h2>Bem vindo ao Sistema de Alunos</h2>
+    @if(true)
+        <p>Bem-vindo ao sistema!</p>
+    @endif
 
     <p>Esta e a pagina inicial</p>
 
