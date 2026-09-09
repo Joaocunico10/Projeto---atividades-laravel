@@ -9,12 +9,16 @@ class AlunoController extends Controller
 {
     public function index()
     {
-        return 'Lista de alunos';
+        $alunos = Aluno::all();
+
+        return $alunos;
     }
 
     public function show($id)
     {
-        return 'Aluno: ' . $id;
+        $aluno = Aluno::find($id);
+
+        return $aluno;
     }
 
     public function create()
@@ -24,22 +28,39 @@ class AlunoController extends Controller
 
     public function store()
     {
-        return 'Cadastrando aluno';
+        $aluno = Aluno::create([
+            'nome' => 'Joao',
+            'curso' => 'Engenharia de Software'
+        ]);
+        return $aluno;
     }
 
     public function edit($id)
     {
-        return 'Editando aluno';
+        $aluno = Aluno::find($id);
+
+        return $aluno;
     }
 
     public function update($id)
     {
-        return 'Atualizando aluno';
+        $aluno = Aluno::find($id);
+
+        $aluno->update([
+            'nome' => 'Carlos',
+            'curso' => 'Medicina'
+        ]);
+
+        return $aluno;
     }
 
     public function destroy($id)
     {
-        return 'Excluindo aluno';
+        $aluno = Aluno::find($id);
+
+        $aluno->delete();
+
+        return $aluno;
     }
 
     public function porCurso()
