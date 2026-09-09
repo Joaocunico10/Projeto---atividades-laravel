@@ -29,15 +29,12 @@ class AlunoPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role === 'admin';
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
     public function update(User $user, Aluno $aluno): bool
     {
-        return false;
+        return $user->role === 'professor';
     }
 
     /**

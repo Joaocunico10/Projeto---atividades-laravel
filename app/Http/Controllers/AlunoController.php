@@ -25,6 +25,8 @@ class AlunoController extends Controller
 
     public function create()
     {
+        Gate::authorize('create', Aluno::class);
+
         return view('alunos.create');
     }
 
@@ -48,9 +50,11 @@ class AlunoController extends Controller
     {
         $aluno = Aluno::find($id);
 
+        Gate::authorize('update', $aluno);
+
         $aluno->update([
-            'nome' => 'Carlos',
-            'curso' => 'Medicina'
+            'nome' => 'Novo Nome',
+            'curso' => 'Novo Curso',
         ]);
 
         return $aluno;
