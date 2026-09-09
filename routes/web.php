@@ -1,18 +1,20 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AlunoController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/alunos/curso', [AlunoController::class, 'porCurso']);
-Route::get('/alunos/nome', [AlunoController::class, 'porNome']);
-Route::get('/alunos/recentes', [AlunoController::class, 'recentes']);
-Route::get('/alunos/quantidade', [AlunoController::class, 'quantidade']);
-Route::get('/alunos/create', [AlunoController::class, 'create']);
-Route::get('/alunos/update/{id}', [AlunoController::class, 'update']);
-Route::get('/alunos/destroy/{id}', [AlunoController::class, 'destroy']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/alunos', [AlunoController::class, 'store']);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
