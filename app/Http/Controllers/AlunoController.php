@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AlunoRequest;
 use Illuminate\Http\Request;
 use App\Models\Aluno;
+use Illuminate\Support\Facades\Gate;
 
 class AlunoController extends Controller
 {
@@ -59,9 +60,11 @@ class AlunoController extends Controller
     {
         $aluno = Aluno::find($id);
 
+        Gate::authorize('delete', $aluno);
+
         $aluno->delete();
 
-        return $aluno;
+        return 'Aluno excluido';
     }
 
     public function porCurso()
