@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AlunoRequest;
 use Illuminate\Http\Request;
 use App\Models\Aluno;
 
@@ -23,14 +24,14 @@ class AlunoController extends Controller
 
     public function create()
     {
-        return 'Formulário de cadastro';
+        return view('alunos.create');
     }
 
-    public function store()
+    public function store(AlunoRequest $request)
     {
         $aluno = Aluno::create([
-            'nome' => 'Joao',
-            'curso' => 'Engenharia de Software'
+            'nome' => $request->nome,
+            'curso' => $request->curso,
         ]);
         return $aluno;
     }
